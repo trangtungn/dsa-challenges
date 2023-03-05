@@ -2,7 +2,7 @@
 
 ## MinMaxDivision
 
-*Medium*
+_Medium_
 
 **Divide array A into K blocks and minimize the largest sum of any block.**
 
@@ -23,12 +23,13 @@ For example, you are given integers K = 3, M = 5 and array A such that:
     A[4] = 2
     A[5] = 2
     A[6] = 2
+
 The array can be divided, for example, into the following blocks:
 
-  [2, 1, 5, 1, 2, 2, 2], [], [] with a large sum of 15;
-  [2], [1, 5, 1, 2], [2, 2] with a large sum of 9;
-  [2, 1, 5], [], [1, 2, 2, 2] with a large sum of 8;
-  [2, 1], [5, 1], [2, 2, 2] with a large sum of 6.
+[2, 1, 5, 1, 2, 2, 2], [], [] with a large sum of 15;
+[2], [1, 5, 1, 2], [2, 2] with a large sum of 9;
+[2, 1, 5], [], [1, 2, 2, 2] with a large sum of 8;
+[2, 1], [5, 1], [2, 2, 2] with a large sum of 6.
 
 The goal is to minimize the large sum. In the above example, 6 is the minimal large sum.
 
@@ -52,13 +53,13 @@ the function should return 6, as explained above.
 
 Write an efficient algorithm for the following assumptions:
 
-  N and K are integers within the range [1..100,000];
-  M is an integer within the range [0..10,000];
-  each element of array A is an integer within the range [0..M].
+N and K are integers within the range [1..100,000];
+M is an integer within the range [0..10,000];
+each element of array A is an integer within the range [0..M].
 
 ## NailingPlanks
 
-*Medium*
+_Medium_
 
 **Count the minimum number of nails that allow a series of planks to be nailed.**
 
@@ -76,6 +77,7 @@ For example, given arrays A, B such that:
     A[1] = 4    B[1] = 5
     A[2] = 5    B[2] = 9
     A[3] = 8    B[3] = 10
+
 four planks are represented: [1, 4], [4, 5], [5, 9] and [8, 10].
 
 Given array C such that:
@@ -85,6 +87,7 @@ Given array C such that:
     C[2] = 7
     C[3] = 10
     C[4] = 2
+
 if we use the following nails:
 
 0, then planks [1, 4] and [4, 5] will both be nailed.
@@ -113,10 +116,11 @@ For example, given arrays A, B, C such that:
     C[2] = 7
     C[3] = 10
     C[4] = 2
+
 the function should return 4, as explained above.
 
 Write an efficient algorithm for the following assumptions:
 
-  N and M are integers within the range [1..30,000];
-  each element of arrays A, B and C is an integer within the range [1..2*M];
-  A[K] ≤ B[K].
+N and M are integers within the range [1..30,000];
+each element of arrays A, B and C is an integer within the range [1..2*M];
+A[K] ≤ B[K].
