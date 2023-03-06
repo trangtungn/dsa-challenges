@@ -169,7 +169,9 @@ This is a demo task.
 
 Write a function:
 
-    def solution(a)
+```ruby
+def solution(a)
+```
 
 that, given an array A of N integers, returns the smallest positive integer (greater than 0) that does not occur in A.
 

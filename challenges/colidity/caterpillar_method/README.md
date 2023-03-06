@@ -149,7 +149,9 @@ For example, the following array A:
 
 Write a function:
 
-    def solution(a)
+```ruby
+def solution(a)
+```
 
 that, given a non-empty array A consisting of N integers, returns the minimal abs sum of two for any pair of indices in this array.
 

@@ -35,7 +35,9 @@ The goal is to minimize the large sum. In the above example, 6 is the minimal la
 
 Write a function:
 
-    def solution(k, m, a)
+```ruby
+def solution(k, m, a)
+```
 
 that, given integers K, M and a non-empty array A consisting of N integers, returns the minimal large sum.
 
