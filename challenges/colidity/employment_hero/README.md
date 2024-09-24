@@ -55,7 +55,7 @@ Write an efficient algorithm for the following assumptions:
 
 ## Task 1
 
-Write a function function solution(x, y) that, given a string x and a string y, returns a boolean that checks whether all of the characters in the string y exist at some point in the string x. Furthermore, the characters from y need to occur in the same order in x. There may be additional characters in string x, so long as each character from y appears and the order is maintained.
+Write a function solution(x, y) that, given a string x and a string y, returns a boolean that checks whether all of the characters in the string y exist at some point in the string x. Furthermore, the characters from y need to occur in the same order in x. There may be additional characters in string x, so long as each character from y appears and the order is maintained.
 
 If all of the characters from y appear in x in the correct order return the boolean true, otherwise return false
 
@@ -75,7 +75,7 @@ Example 2
 
 Result false
 
-The expected result if false because even though "C" and "A" both appear in "ABCD" the order is in x is different to y.
+The expected result is false because even though "C" and "A" both appear in "ABCD" the order is in x is different to y.
 
 Example 3
 
@@ -83,7 +83,7 @@ Example 3
 
 Result true
 
-The expected result is tree because "B" and "A" both appear in "ABCAD". Note, the first "A" appears before the "B" but then there is a subsequent "A" so the result should be true.
+The expected result is true because "B" and "A" both appear in "ABCAD". Note, the first "A" appears before the "B" but then there is a subsequent "A" so the result should be true.
 
 ## Task 3
 

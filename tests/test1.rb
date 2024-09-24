@@ -57,6 +57,11 @@ def solution_b(arr)
 
   # Start from 1 and find the first missing positive integer
   # In the worst case, it will iterate up to the maximum value in the input array plus one.
+  # p 1.step.take(4) # [1, 2, 3, 4]
+  # p 10.step(by: -1).take(4) # [10, 9, 8, 7]
+  # 3.step(to: 5) {|i| print i, " " } # 3 4 5
+  # 1.step(10, 2) {|i| print i, " " } # 1 3 5 7 9
+
   1.step do |i|
     return i unless positive_set.include?(i)
   end
