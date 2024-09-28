@@ -22,6 +22,13 @@ def solution2(x, y, d)
   (distance / d.to_f).ceil
 end
 
+def solution3(x, y, d)
+  distance = y - x
+  return 0 if distance.zero?
+
+  (distance / d) + (distance % d == 0 ? 0 : 1)
+end
+
 solution(1, 1, 20)
 solution(1, 1, 1)
 solution(1, 2, 1)

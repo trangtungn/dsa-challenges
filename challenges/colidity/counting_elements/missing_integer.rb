@@ -28,6 +28,21 @@ def solution(a)
   sorted_arr[n - 1] + 1
 end
 
+def solution2(a)
+  arr = []
+  a.each do |item|
+    next if item < 1
+
+    arr[item - 1] = true if arr[item - 1].nil?
+  end
+
+  arr.each_with_index do |item, idx|
+    return idx + 1 if item.nil?
+  end
+
+  arr.length + 1
+end
+
 p solution([-3])
 p solution([0])
 p solution([1])
@@ -42,3 +57,19 @@ p solution([1, 1, 1])
 p solution([2, 3, 2])
 p solution([3, 3, 3])
 p solution([6, 7, 3])
+
+p '------'
+p solution2([-3])
+p solution2([0])
+p solution2([1])
+p solution2([2])
+p solution2([3])
+p solution2([-3, 0])
+p solution2([-3, 1])
+p solution2([-3, 0, 1])
+p solution2([-1, -3, 2])
+p solution2([0, 0, 0])
+p solution2([1, 1, 1])
+p solution2([2, 3, 2])
+p solution2([3, 3, 3])
+p solution2([6, 7, 3])

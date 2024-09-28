@@ -14,6 +14,18 @@ def solution(a)
   prev + 1
 end
 
+def solution1(a)
+  sorted_a = a.sort
+  sorted_a.each_with_index do |item, index|
+    val = index + 1
+    next if val == item
+
+    return val
+  end
+
+  a.length + 1
+end
+
 params = [
   [1],
   [],
@@ -23,6 +35,12 @@ params = [
   [4, 3, 2, 1],
 ]
 
+p "solution"
 params.each do |param|
   p solution(param)
+end
+
+p "solution1"
+params.each do |param|
+  p solution1(param)
 end

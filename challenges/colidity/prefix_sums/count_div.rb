@@ -40,6 +40,21 @@ def solution2(a, b, k)
   end
 end
 
+def solution3(a, b, k)
+  return 1 if b == 0
+  return ((a % k == 0) ? 1 : 0) if a == b
+
+  count = b / k
+  uncount = 0
+  if a > 0
+    uncount = (a - 1) / k
+  else
+    count += 1
+  end
+
+  count - uncount
+end
+
 list_args = [
   [0, 0, 1],
   [3, 3, 5],
@@ -60,4 +75,6 @@ list_args.each do |args|
   p solution(*args)
   p "#2 - #{args}"
   p solution2(*args)
+  p "#3 - #{args}"
+  p solution3(*args)
 end

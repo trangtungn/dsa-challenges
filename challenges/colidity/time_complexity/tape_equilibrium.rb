@@ -22,8 +22,45 @@ def solution(a)
   min
 end
 
-p solution [0, 1]
-p solution [0, 1, 0]
-p solution [1, 0]
-p solution [-1, 0, 1]
-p solution [3, 2, 1, 0, 5]
+def solution2(a)
+  n = a.length
+  total = a.sum
+
+  min = 2000
+  position = 1
+  sum1 = a[0]
+  while position < n
+    sum2 = total - sum1
+    diff = (sum2 - sum1).abs
+    min = diff if diff < min
+    return min if min == 0
+
+    sum1 += a[position]
+    position += 1
+  end
+
+  min
+end
+
+args = [
+  [0, 0], # 0
+  [1, 1], # 0
+  [1, 1, 1], # 0
+  [-1, 3],
+  [-3, 1],
+  [-3, 1, 1],
+  [-1, -3, 1],
+  [-1, -3, 0, 1],
+  [0, 1],
+  [0, 1, 0],
+  [1, 0],
+  [-1, 0, 1],
+  [3, 2, 1, 0, 5]
+]
+
+args.each do |arg|
+  p '======='
+  p arg
+  p "Solution 1: #{solution(arg)}"
+  p "Solution 2: #{solution2(arg)}"
+end
