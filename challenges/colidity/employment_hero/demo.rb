@@ -17,6 +17,22 @@ def solution(a)
   min + 1
 end
 
+def solutionb(a)
+  sorted_a = a.sort
+  occurred = 0
+  sorted_a.each_with_index do |item, idx|
+    next if item < 1
+
+    if occurred == item || (item > occurred && item == occurred + 1)
+      occurred = item
+    else
+      return occurred + 1
+    end
+  end
+
+  occurred + 1
+end
+
 args = [
   [1, 3, 6, 4, 1, 2],
   [1, 2, 3],

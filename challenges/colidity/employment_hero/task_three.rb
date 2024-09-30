@@ -79,11 +79,10 @@ end
 # Breadth First Search or BFS for a Graph: https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/#applications-of-bfs-in-graphs
 def solution3(connections, head, tail)
   return -1 if connections.empty?
+  return 0 if head == tail
 
   mapper = {}
   connections.each do |connection|
-    return 0 if connection.include?(head) && connection.include?(tail)
-
     name1, name2 = connection.split(':')
     mapper[name1] = [] unless mapper[name1]
     mapper[name1] << name2
@@ -121,11 +120,10 @@ end
 # Depth First Search or DFS for a Graph: https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
 def solution4(connections, head, tail)
   return -1 if connections.empty?
+  return 0 if head == tail
 
   mapper = {}
   connections.each do |connection|
-    return 0 if connection.include?(head) && connection.include?(tail)
-
     from, to = connection.split(':')
     mapper[from] = [] unless mapper[from]
     mapper[from] << to
@@ -164,7 +162,8 @@ args = [
   [['fred:joe', 'joe:mary', 'mary:fred', 'mary:bill'], 'mary', 'fred'],
   [['fred:joe', 'joe:mary', 'mary:fred', 'mary:mary'], 'mary', 'mary'],
   [['fred:joe', 'joe:mary', 'mary:fred', 'mary:mary', 'kate:sean', 'sean:sally', 'mary:bob', 'bob:sean', 'bob:bill'], 'fred', 'sally'],
-  [[], 'fred', 'sally']
+  [[], 'fred', 'sally'],
+  [['fredsally:billy', 'billy:sally'], 'fred', 'billy']
 ]
 
 args.each do |arg|

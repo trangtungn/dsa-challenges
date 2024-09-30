@@ -80,6 +80,9 @@ def solution2(s, p, q)
     prefix_sums[i][impact_factor - 1] += 1
   end
 
+  p "prefix_sums"
+  p prefix_sums
+
   # for each query, find the minimal impact factor in the corresponding range
   for i in 0..(m - 1)
     from = p[i]
@@ -102,16 +105,130 @@ def solution2(s, p, q)
   return result
 end
 
+def solution3(s, p, q)
+  mapper = {
+    "A" => 1,
+    "C" => 2,
+    "G" => 3,
+    "T" => 4
+  }
+
+  arr = []
+  s.each_char do |char|
+    arr << mapper[char]
+  end
+
+  p "arr: #{arr}"
+
+  m = p.length
+  res = []
+  for i in 0..(m - 1) do
+    from = p[i]
+    to = q[i]
+    min = 100000
+    (from..to).each do |item|
+      min = arr[item] if arr[item] < min
+    end
+    res << min
+  end
+
+  res
+end
+# Analysis of solution3
+# Detected time complexity:
+# O(N * M)
+# expand allExample tests
+# ▶example
+# example test✔OK
+# expand allCorrectness tests
+# ▶extreme_sinlge
+# single character string✔OK
+# ▶extreme_double
+# double character string✔OK
+# ▶simple
+# simple tests✔OK
+# ▶small_length_string
+# small length simple string✔OK
+# ▶small_random
+# small random string, length = ~300✔OK
+# expand allPerformance tests
+# ▶almost_all_same_letters
+# GGGGGG..??..GGGGGG..??..GGGGGG✘TIMEOUT ERROR
+# Killed. Hard limit reached: 7.000 sec.
+# ▶large_random
+# large random string, length✘TIMEOUT ERROR
+# Killed. Hard limit reached: 7.000 sec.
+# ▶extreme_large
+# all max ranges✘TIMEOUT ERROR
+# Killed. Hard limit reached: 7.000 sec.
+
+def solution4(s, p, q)
+  p "----- solution4 -----"
+  p "s: #{s}"
+  p "p: #{p}"
+  p "q: #{q}"
+
+  n = s.length
+  m = p.length
+
+  # Initialize prefix sum arrays for each nucleotide
+  a_sum = [0] * (n + 1)
+  c_sum = [0] * (n + 1)
+  g_sum = [0] * (n + 1)
+  t_sum = [0] * (n + 1)
+  # Calculate prefix sums
+  s.each_char.with_index do |char, i|
+    a_sum[i + 1] = a_sum[i]
+    c_sum[i + 1] = c_sum[i]
+    g_sum[i + 1] = g_sum[i]
+    t_sum[i + 1] = t_sum[i]
+    case char
+    when 'A' then a_sum[i + 1] += 1
+    when 'C' then c_sum[i + 1] += 1
+    when 'G' then g_sum[i + 1] += 1
+    when 'T' then t_sum[i + 1] += 1
+    end
+  end
+
+  p "a_sum: #{a_sum}"
+  p "c_sum: #{c_sum}"
+  p "g_sum: #{g_sum}"
+  p "t_sum: #{t_sum}"
+  # Process queries
+  result = []
+  m.times do |i|
+    from = p[i]
+    to = q[i] + 1
+    p "from: #{from} - to: #{to}"
+
+    if a_sum[to] > a_sum[from]
+      result << 1
+    elsif c_sum[to] > c_sum[from]
+      result << 2
+    elsif g_sum[to] > g_sum[from]
+      result << 3
+    else
+      result << 4
+    end
+  end
+
+  result
+end
+
 list_args = [
   ['CAGCCTA', [2, 5, 0], [4, 5, 6]]
 ]
 
 list_args.each do |args|
-  p "#1 - #{args}"
-  p 'Note: this solution is O(n*m), just use for reference'
-  p solution(*args)
-  p "#2 - #{args}"
-  p solution1(*args)
+  # p "#0 - #{args}"
+  # p 'Note: this solution is O(n*m), just use for reference'
+  # p solution(*args)
+  # p "#1 - #{args}"
+  # p solution1(*args)
+  # p "#2 - #{args}"
+  # p solution2(*args)
   p "#3 - #{args}"
-  p solution2(*args)
+  p solution3(*args)
+  p "#4 - #{args}"
+  p solution4(*args)
 end
