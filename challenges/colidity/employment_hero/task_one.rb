@@ -1,48 +1,45 @@
 #!/Users/trangtungn/.rbenv/shims/ruby -w
 # frozen_string_literal: true
 
-# USE array.index for better search performance
-def solution(a, b)
-  return false if a.empty? || b.empty?
-
-  i = 0 # Index to keep track of current position in a
-  b.each_char do |char|
-    # Search for the current character in a, starting from the current index
-    idx = a.index(char, i)
-    return false if idx.nil? # If the character is not found, return false
-
-    # If the character is found, update the current index to continue searching from the next position
-    i = idx + 1
-  end
-  # If all characters are found in the correct order, return true
-  true
-end
 
 def solution2(a, b)
-  arr_a = a.chars
-  arr_b = b.chars
-  return false if arr_a.empty? || arr_b.empty?
+  return false if a.empty? || b.empty?
+  return false if b.length > a.length
 
-  na = arr_a.size
-  nb = arr_b.size
+  idx = 0
+  a.each_char do |char_a|
+    # p "char_a: #{char_a}, b[idx]: #{b[idx]}"
+    if char_a == b[idx]
+      idx += 1
 
-  return false if nb > na
-
-  k = 0
-  arr_b.each do |char_b|
-    result = false
-    (k...na).each do |i|
-      next if arr_a[i] != char_b
-
-      result = true
-      k = i + 1
-      break
+      return true if idx == b.length
     end
-
-    return false if result == false
   end
 
-  true
+  false
+end
+
+# Claude AI solution
+def solution3(x, y)
+  # Initialize pointer for y
+  j = 0
+  y_len = y.length
+
+  # If y is empty, it's technically a subsequence
+  return true if y_len.zero?
+
+  # Iterate through string x
+  x.each_char do |char|
+    # If we find a matching character, move to next character in y
+    if char == y[j]
+      j += 1
+      # If we've matched all characters in y, we're done
+      return true if j == y_len
+    end
+  end
+
+  # If we haven't found all characters in y, return false
+  false
 end
 
 args = [
@@ -60,8 +57,9 @@ args = [
 ]
 
 args.each_with_index do |arg, i|
-  p '#1 ---- '
-  p solution(*arg)
-  p '#2 ---- '
+  p "=== Case #{i + 1}: #{arg}"
+  p '#2 ---- My solution'
   p solution2(*arg)
+  p '#3 ---- Claude AI'
+  p solution3(*arg)
 end
