@@ -43,7 +43,7 @@ Write an efficient algorithm for the following assumptions:
 
 ## MaxSliceSum
 
-*Medium*
+*Easy*
 
 **Find a maximum sum of a compact subsequence of array elements.**
 
