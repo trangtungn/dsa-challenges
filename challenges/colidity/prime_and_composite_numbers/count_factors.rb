@@ -1,6 +1,7 @@
 #!/Users/trangtungn/.rbenv/shims/ruby -w
 # frozen_string_literal: true
 
+# Bad solution - O(N) time complexity
 def solution(n)
   count = 0
   (1..n).each do |m|
@@ -71,12 +72,75 @@ def solution2(n)
   count
 end
 
+# My solution - only check up to square root of n
+def solution3(n)
+  i = 1
+  count = 0
+  while i * i <= n
+    if n % i == 0
+      if i * i == n
+        count += 1
+      else
+        count += 2
+      end
+    end
+
+    i += 1
+  end
+
+  count
+end
+
 args = [
-  24
+  24,
+  15,
+  16,
+  5
 ]
+
+# Analysis
+# Detected time complexity:
+# O(sqrt(N))
+# Example tests
+# ▶example1
+# example test (N=24=4!)✔OK
+# Correctness tests
+# ▶squares
+# N=16, N=36✔OK
+# ▶tiny
+# N <= 10✔OK
+# ▶simple1
+# N=41(prime), N=42✔OK
+# ▶simple2
+# N=69, N=64, N=120=5!✔OK
+# ▶simple3
+# N=720=6!, N=1111✔OK
+# ▶simple4
+# N=5,040=7!, N=12,345✔OK
+# ▶simple5
+# N=34,879, N=40,320=8!✔OK
+# ▶extreme_one
+# N=1✔OK
+# Performance tests
+# ▶medium1
+# N=362,880=9!, N=1,948,102✔OK
+# ▶medium2
+# N=3,628,800=10!, N=5,621,892, N=4,999,696✔OK
+# ▶big1
+# N=27,043,111, N=39,916,800=11!, N = 39,992,976✔OK
+# ▶big2
+# N=97,093,212, N=2^28✔OK
+# ▶big3
+# N=479,001,600=12!, N=780291637(prime), N=449,991,369✔OK
+# ▶extreme_maxint
+# N=1,000,000,000, N=MAX_INT, N=2147,395,600✔OK
 
 args.each do |arg|
   p '----'
   p "#1 - #{arg}"
   p solution(arg)
+  p "#2 - Claude AI: counting divisors #{arg}"
+  p solution2(arg)
+  p "#3 - My solution: counting divisors #{arg}"
+  p solution3(arg)
 end
