@@ -54,10 +54,6 @@ def solution2(a)
   max_double_slice
 end
 
-args = [
-  [3, 2, 6, -1, 4, 5, -1, 2]
-]
-
 # Analysis
 # Detected time complexity:
 # O(N)
@@ -93,6 +89,11 @@ args = [
 # ▶large_sequence
 # many the same small sequences, length = ~100,000
 #
+
+args = [
+  [3, 2, 6, -1, 4, 5, -1, 2]
+]
+
 args.each do |arg|
   p '----'
   p "#1 - #{arg}"
