@@ -170,3 +170,10 @@ Write an efficient algorithm for the following assumptions:
 
   - N is an integer within the range [5..100,000];
   - each element of array A is an integer within the range [1..1,000,000,000].
+
+**Hint:** https://www.geeksforgeeks.org/smallest-sum-contiguous-subarray/
+
+## References
+
+- [Maximum Subarray Sum – Kadane’s Algorithm](https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/)
+- [Smallest sum contiguous subarray] (https://www.geeksforgeeks.org/smallest-sum-contiguous-subarray/)
