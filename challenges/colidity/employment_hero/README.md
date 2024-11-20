@@ -120,7 +120,7 @@ Result -1
 
 The expected result is -1 because there are no connections that link fred to sally through either his friends or friends of friends etc.
 
-## Task 4
+## Task 5
 
 There are two-letter strings, "AA", "AB", and "BB", which appear AA, AB, and BB times respectively. The task is to join some of these strings to create the longest possible string which does not contain "AAA" or "BBB".
 
@@ -151,3 +151,14 @@ Assumptions:
 - The resulting string will not be empty.
 
 In your solution, focus on correctness. The performance of your solution will not be the focus of the assessment.
+
+## Task 8 - possible task
+Given an array with n integers, return  all numbers with x number of unique digits, where 1 <= x =< 2.
+
+Example 1:
+
+Input: [11221, 1223, 11, 22, 1122, 44, 1234, 123]
+Output: 91
+Explanation: The answer should be 4 because these number satisfy the constraint mentioned above [11221, 11, 22, 1122]
+
+Consider the efficiency, time and space complexity and the correctness.
