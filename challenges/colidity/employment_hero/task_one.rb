@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 
-def solution2(a, b)
+def my_solution(a, b)
   return false if a.empty? || b.empty?
   return false if b.length > a.length
 
@@ -19,27 +19,16 @@ def solution2(a, b)
   false
 end
 
-# Claude AI solution
-def solution3(x, y)
-  # Initialize pointer for y
-  j = 0
-  y_len = y.length
+def solution(str_x, str_y)
+  x_index = 0
+  y_index = 0
 
-  # If y is empty, it's technically a subsequence
-  return true if y_len.zero?
-
-  # Iterate through string x
-  x.each_char do |char|
-    # If we find a matching character, move to next character in y
-    if char == y[j]
-      j += 1
-      # If we've matched all characters in y, we're done
-      return true if j == y_len
-    end
+  while x_index < str_x.length && y_index < str_y.length
+    y_index += 1 if str_x[x_index] == str_y[y_index]
+    x_index += 1
   end
 
-  # If we haven't found all characters in y, return false
-  false
+  y_index == str_y.length
 end
 
 args = [
@@ -57,9 +46,7 @@ args = [
 ]
 
 args.each_with_index do |arg, i|
-  p "=== Case #{i + 1}: #{arg}"
-  p '#2 ---- My solution'
-  p solution2(*arg)
-  p '#3 ---- Claude AI'
-  p solution3(*arg)
+  p "=== Case #{i + 1}: #{arg.join("  ")}"
+  p my_solution(*arg)
+  p solution(*arg)
 end
