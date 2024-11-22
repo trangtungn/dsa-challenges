@@ -32,7 +32,7 @@ def my_solution(aa, ab, bb)
 
   # p "#{aa_arr} #{ab_arr} #{bb_arr}"
 
-  arr
+  arr.join
 end
 
 args = [
@@ -83,7 +83,7 @@ def solution(aa, ab, bb)
     end
   end
 
-  result
+  result.join
 end
 
 args.each do |arg|
