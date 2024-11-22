@@ -1,46 +1,19 @@
 #!/Users/trangtungn/.rbenv/shims/ruby -w
 # frozen_string_literal: true
 
-def solution(a)
-  n = a.size
-  sorted_arr = a.sort
-  return 1 if sorted_arr[0] > 1
+def solution(arr)
+  # Create a hash to mark present numbers
+  present = {}
 
-  (1..(n - 1)).each do |i|
-    prev_elem = sorted_arr[i - 1]
-    elem = sorted_arr[i]
-
-    next if elem <= 0 || elem == prev_elem
-
-    if prev_elem <= 0
-      if elem > 1
-        return 1
-      else
-        next
-      end
-    end
-
-    return prev_elem + 1 if elem - prev_elem > 1
+  # Mark all positive numbers as present
+  arr.each do |num|
+    present[num] = true if num.positive?
   end
 
-  return 1 if sorted_arr[n - 1] <= 0
-
-  sorted_arr[n - 1] + 1
-end
-
-def solution2(a)
-  arr = []
-  a.each do |item|
-    next if item < 1
-
-    arr[item - 1] = true if arr[item - 1].nil?
+  # Find the first missing positive integer
+  1.step do |i|
+    return i unless present[i]
   end
-
-  arr.each_with_index do |item, idx|
-    return idx + 1 if item.nil?
-  end
-
-  arr.length + 1
 end
 
 p solution([-3])
