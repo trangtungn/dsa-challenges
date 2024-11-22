@@ -85,7 +85,7 @@ Result true
 
 The expected result is true because "B" and "A" both appear in "ABCAD". Note, the first "A" appears before the "B" but then there is a subsequent "A" so the result should be true.
 
-## Task 3
+## Task 3*
 
 Write a function that receives an array of strings that represent friend connections along with the names of two people and retuns a number representing the degrees of separation between the two people.
 
@@ -151,6 +151,39 @@ Assumptions:
 - The resulting string will not be empty.
 
 In your solution, focus on correctness. The performance of your solution will not be the focus of the assessment.
+
+## Task 6
+
+You are given N fractions, numbered from 0 to N-1. Your task is to count the number of occurrences of the fraction that appears most often.
+
+Notice that two fractions may be equal even if they have different representations; for example, 3/5 and 6/10 are equal.  
+
+You should not assume that floating point operations are precise.
+
+Write a function:
+
+```ruby
+def solution(x, y)
+```
+
+that, given two arrays X and Y consisting of N integers each (which represent the K-th fraction as X[K]/Y[K]), returns the number of occurrences of the fraction that appears most often.  
+
+Examples:
+
+Given arrays X=[1,2,3,4,0], Y=[2,3,6,8,4] the function should return 3, as fractions 1/2, 3/6, 4/8 are all equal to each other.
+
+Given arrays X=[3,3,4], Y=[5,4,3], the function should return 1, as no two fractions are equal.
+
+Given arrays X=[4,4,7,1,2] Y=[4,4,8,1,2], the function should return 4, as fractions 4/4, 4/4, 1/1, 2/2 are all equal to each other.
+
+Given arrays X=[1,2,3,1,2], Y=[2,4,6,5,10] the function should return 3, as fractions 1/2, 2/4, 3/6 are all equal to each other.
+
+Write an efficient algorithm for the following assumptions:  
+
+N is an integer within the range [1..100,000);
+each element of array X is an integer within the range [0..2,000,000,000)
+each element of array Y is an integer within the range [1..2,000,000,000)
+arrays X and Y are of equal length.
 
 ## Task 8 - possible task
 Given an array with n integers, return  all numbers with x number of unique digits, where 1 <= x =< 2.
