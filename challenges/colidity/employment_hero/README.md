@@ -139,7 +139,7 @@ That, given three integers AA, AB, and BB, returns the longest string that can b
 Examples:
 1. Given AA = 5, AB = 0, and BB = 2, the function should return "AABBAABBAA", as explained above.
 
-2. Given AA = 1, AB = 2, and BB = 1, possible results are "BBABABAB", "ABABABBB", "ABABABB", or "AABBABAB".
+2. Given AA = 1, AB = 2, and BB = 1, possible results are "BBABABAA", "ABAABBAB", "ABABAABB", or "AABBABAB".
 
 3. Given AA = 0, AB = 2, and BB = 0, the function should return "ABAB".
 

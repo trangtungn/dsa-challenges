@@ -1,109 +1,93 @@
 #!/Users/trangtungn/.rbenv/shims/ruby -w
 # frozen_string_literal: true
 
-def solution(aa, ab, bb)
-  return "" if aa == 0 && ab == 0 && bb == 0
-
-  max_no = [aa, ab, bb].max
-  ab_arr = Array.new(ab, "AB")
+def my_solution(aa, ab, bb)
   aa_arr = Array.new(aa, "AA")
+  ab_arr = Array.new(ab, "AB")
   bb_arr = Array.new(bb, "BB")
 
   arr = []
-  max_no.times do |_i|
-    arr << ab_arr.shift if arr.last != "BB" && ab_arr.any?
-    arr.unshift(ab_arr.shift) if arr.first != "AA" && ab_arr.any?
-
-    arr << aa_arr.shift if arr.last != "AA" && aa_arr.any?
-    arr.unshift(aa_arr.shift) if arr.first != "AB" && arr.first != "AA"  && aa_arr.any?
-
-    arr << bb_arr.shift if arr.last != "BB" && arr.last != "AB" && bb_arr.any?
-    arr.unshift(bb_arr.shift) if arr.first != "BB" && bb_arr.any?
+  min_count = [aa, bb].min
+  min_count.times do
+    arr << aa_arr.shift
+    arr << bb_arr.shift
   end
 
-  arr.join
-end
-
-# This is the solution from Claude 3.5
-def solution2(aa, ab, bb)
-  # Initialize result string
-  result = ""
-
-  # Keep track of remaining counts
-  counts = {
-    "AA" => aa,
-    "AB" => ab,
-    "BB" => bb
-  }
-
-  # Track last two characters to avoid AAA or BBB
-  last_two = ""
-
-  while true
-    # Try to add a segment based on the last two characters
-    added = false
-
-    if last_two == "AA"
-      # After AA, we can't add another A
-      if counts["BB"] > 0
-        result += "BB"
-        counts["BB"] -= 1
-        added = true
-      elsif counts["AB"] > 0
-        result += "AB"
-        counts["AB"] -= 1
-        added = true
-      end
-    elsif last_two == "BB"
-      # After BB, we can't add another B
-      if counts["AA"] > 0
-        result += "AA"
-        counts["AA"] -= 1
-        added = true
-      elsif counts["AB"] > 0
-        result += "AB"
-        counts["AB"] -= 1
-        added = true
-      end
-    else
-      # We can add any segment, prioritize using AA and BB
-      if counts["AA"] > 0 && last_two[-1] != 'A'
-        result += "AA"
-        counts["AA"] -= 1
-        added = true
-      elsif counts["BB"] > 0 && last_two[-1] != 'B'
-        result += "BB"
-        counts["BB"] -= 1
-        added = true
-      elsif counts["AB"] > 0
-        result += "AB"
-        counts["AB"] -= 1
-        added = true
-      end
+  val = aa_arr.shift || bb_arr.shift
+  if val
+    if val != arr.last
+      arr << val
+    elsif val != arr.first
+      arr.unshift(val)
     end
-
-    break unless added
-
-    # Update last two characters
-    last_two = result[-2..-1]
   end
 
-  result
+  ab_arr.size.times do |_i|
+    if arr.empty? || arr.last == "BB" || arr.last == "AB"
+      arr << ab_arr.shift
+    elsif arr.empty? || arr.first == "AA" || arr.first == "AB"
+      arr.unshift(ab_arr.shift)
+    end
+  end
+
+  # p "#{aa_arr} #{ab_arr} #{bb_arr}"
+
+  arr
 end
 
 args = [
   [5, 0, 2],
   [1, 2, 1],
+  [0, 2, 1],
   [0, 2, 0],
   [0, 0, 10],
   [3, 0, 0],
   [4, 0, 1],
   [0, 3, 2],
   [0, 0, 0],
+  [1, 1, 2],
+  [6, 3, 5],
+  [5, 3, 3],
+  [3, 3, 5],
+  [2, 3, 5],
 ]
 
+# Claude-3.5-sonnet solution - Time and space complexity O(n)
+def solution(aa, ab, bb)
+  result = []
+
+  # Alternate AA and BB
+  min_count = [aa, bb].min
+  min_count.times do
+    result << "AA" << "BB"
+  end
+
+  # Handle remaining AA or BB
+  remaining_aa = aa - min_count
+  remaining_bb = bb - min_count
+
+  if remaining_aa > 0
+    result << "AA" if result.empty? || result.last == "BB"
+    result.unshift("AA") if result.first == "BB"
+  elsif remaining_bb > 0
+    result << "BB" if result.empty? || result.last == "AA"
+    result.unshift("BB") if result.first == "AA"
+  end
+
+  # Insert AB segments
+  ab.times do
+    if result.empty? || result.last == "BB" || result.last == "AB"
+      result << "AB"
+    elsif result.first == "AA" || result.first == "AB"
+      result.unshift("AB")
+    end
+  end
+
+  result
+end
+
 args.each do |arg|
-  p '====' * 10
+  p "==== #{arg}"
+  p my_solution(*arg)
   p solution(*arg)
-  p solution2(*arg)
 end
