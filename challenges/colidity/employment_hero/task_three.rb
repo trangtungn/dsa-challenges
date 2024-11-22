@@ -3,7 +3,7 @@
 
 # Solution 3: using BFS. PASSED ALL TESTS
 # Breadth First Search or BFS for a Graph: https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/#applications-of-bfs-in-graphs
-def solution3(connections, head, tail)
+def solution(connections, head, tail)
   return -1 if connections.empty?
   return 0 if head == tail
 
@@ -92,7 +92,7 @@ args = [
 ]
 
 args.each do |arg|
-  p "======= Case: #{arg}"
-  p "#3 - BFS: #{solution3(*arg)}"
+  p "======= Case: #{arg.join("-->")}"
+  p "#1 - BFS: #{solution(*arg)}"
   p "#4 - DFS: #{solution4(*arg)}"
 end
