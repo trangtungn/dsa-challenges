@@ -120,7 +120,7 @@ Result -1
 
 The expected result is -1 because there are no connections that link fred to sally through either his friends or friends of friends etc.
 
-## Task 5
+## Task 4
 
 There are two-letter strings, "AA", "AB", and "BB", which appear AA, AB, and BB times respectively. The task is to join some of these strings to create the longest possible string which does not contain "AAA" or "BBB".
 
