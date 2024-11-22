@@ -44,6 +44,67 @@ def solution(n, reserved_seats)
   total_groups
 end
 
+# My solution: Currently wrong in one case
+def my_solution(n, s)
+  reserved_seats = map_seat_to_position(s)
+
+  # p "reserved_seats: #{reserved_seats.inspect}"
+  total = (n - reserved_seats.size) * 2
+  reserved_seats.each do |row, seats|
+    start_at = 1
+    seats.sort.each do |seat_num|
+      avail_count = (seat_num - start_at) / 4
+      if avail_count == 2 && seat_num < 10
+        avail_count -= 1
+      elsif avail_count == 1 && seat_num < 6
+        avail_count -= 1
+      end
+
+      total += avail_count
+
+      # p "row: #{row} - seat_num: #{seat_num} - start_at: #{start_at} - avail_count: #{avail_count}"
+      start_at = seat_num + 1
+    end
+
+    right_count = (10 - start_at) / 4
+
+    if start_at <= 6 && right_count > 0
+      if start_at <= 2
+        right_count = 2
+      elsif start_at <=6
+        right_count = 1
+      end
+
+      total += right_count
+    end
+  end
+
+  total
+end
+
+def map_seat_to_position(s)
+  row_positions = {
+    "A" => 1,
+    "B" => 2,
+    "C" => 3,
+    "D" => 4,
+    "E" => 5,
+    "F" => 6,
+    "G" => 7,
+    "H" => 8,
+    "J" => 9,
+    "K" => 10
+  }
+
+  reserved_seats = Hash.new { |h, k| h[k] = [] }
+
+  s.split(" ").each do |seat|
+    reserved_seats[seat[0..seat.length - 1].to_i] << row_positions[seat[-1]]
+  end
+
+  reserved_seats
+end
+
 args = [
   [3, "1B 1C 1H 2F 3A 3J"],
   [2, "2A 1H 2F"],
@@ -57,4 +118,5 @@ args.each do |arg|
   puts "=" * 10
   puts "arg: #{arg}"
   puts "Result: #{solution(*arg)}"
+  puts "My Solution Result: #{my_solution(*arg)}"
 end
