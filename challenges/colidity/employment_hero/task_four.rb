@@ -2,18 +2,16 @@
 # frozen_string_literal: true
 
 def my_solution(aa, ab, bb)
-  aa_arr = Array.new(aa, "AA")
-  ab_arr = Array.new(ab, "AB")
-  bb_arr = Array.new(bb, "BB")
-
   arr = []
   min_count = [aa, bb].min
   min_count.times do
-    arr << aa_arr.shift
-    arr << bb_arr.shift
+    arr << "AA"
+    aa -= 1
+    arr << "BB"
+    bb -= 1
   end
 
-  val = aa_arr.shift || bb_arr.shift
+  val = aa > bb ? "AA" : (aa < bb ? "BB" : nil)
   if val
     if val != arr.last
       arr << val
@@ -22,15 +20,16 @@ def my_solution(aa, ab, bb)
     end
   end
 
-  ab_arr.size.times do |_i|
-    if arr.empty? || arr.last == "BB" || arr.last == "AB"
-      arr << ab_arr.shift
-    elsif arr.empty? || arr.first == "AA" || arr.first == "AB"
-      arr.unshift(ab_arr.shift)
-    end
+  ab_arr = []
+  ab.times do |_i|
+    ab_arr << "AB"
   end
 
-  # p "#{aa_arr} #{ab_arr} #{bb_arr}"
+  if arr.empty? ||arr.last == "BB" || arr.last == "AB"
+    arr += ab_arr
+  elsif arr.first == "AA" || arr.first == "AB"
+    arr = ab_arr + arr
+  end
 
   arr.join
 end
