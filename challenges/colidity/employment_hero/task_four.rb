@@ -3,53 +3,55 @@
 
 def my_solution(aa, ab, bb)
   arr = []
-  min_count = [aa, bb].min
-  min_count.times do
-    arr << "AA"
-    aa -= 1
-    arr << "BB"
-    bb -= 1
-  end
 
-  val = aa > bb ? "AA" : (aa < bb ? "BB" : nil)
-  if val
-    if val != arr.last
-      arr << val
-    elsif val != arr.first
-      arr.unshift(val)
+  while aa > 0 || bb > 0
+    if arr.empty?
+      if aa >= bb && aa > 0
+        arr << "AA"
+        aa -= 1
+      elsif bb > aa && bb > 0
+        arr << "BB"
+        bb -= 1
+      end
+    else
+      if arr.last == "AA" && bb > 0
+        arr << "BB"
+        bb -= 1
+      elsif arr.last == "BB" && aa > 0
+        arr << "AA"
+        aa -= 1
+      elsif arr.first == "AA" && bb > 0
+        arr.unshift("BB")
+        bb -= 1
+      elsif arr.first == "BB" && aa > 0
+        arr.unshift("AA")
+        aa -= 1
+      else
+        break
+      end
     end
   end
 
-  ab_arr = []
-  ab.times do |_i|
-    ab_arr << "AB"
-  end
+  while ab > 0
+    if arr.empty?
+      arr << "AB"
+    elsif arr.last == "AA"
+      arr.unshift("AB")
+    elsif arr.last == "BB"
+      arr << "AB"
+    else
+      if arr.first == "AB"
+        arr.unshift("AB")
+      elsif arr.last == "AB"
+        arr << "AB"
+      end
+    end
 
-  if arr.empty? ||arr.last == "BB" || arr.last == "AB"
-    arr += ab_arr
-  elsif arr.first == "AA" || arr.first == "AB"
-    arr = ab_arr + arr
+    ab -= 1
   end
 
   arr.join
 end
-
-args = [
-  [5, 0, 2],
-  [1, 2, 1],
-  [0, 2, 1],
-  [0, 2, 0],
-  [0, 0, 10],
-  [3, 0, 0],
-  [4, 0, 1],
-  [0, 3, 2],
-  [0, 0, 0],
-  [1, 1, 2],
-  [6, 3, 5],
-  [5, 3, 3],
-  [3, 3, 5],
-  [2, 3, 5],
-]
 
 # Claude-3.5-sonnet solution - Time and space complexity O(n)
 def solution(aa, ab, bb)
@@ -66,11 +68,23 @@ def solution(aa, ab, bb)
   remaining_bb = bb - min_count
 
   if remaining_aa > 0
-    result << "AA" if result.empty? || result.last == "BB"
-    result.unshift("AA") if result.first == "BB"
+    if result.empty? || result.last == "BB"
+      result << "AA" 
+      remaining_aa -= 1
+    end
+    if result.first == "BB" && remaining_aa > 0
+      result.unshift("AA") 
+      remaining_aa -= 1
+    end
   elsif remaining_bb > 0
-    result << "BB" if result.empty? || result.last == "AA"
-    result.unshift("BB") if result.first == "AA"
+    if result.empty? || result.last == "AA"
+      result << "BB"
+      remaining_bb -= 1
+    end
+    if result.first == "AA" && remaining_bb > 0
+      result.unshift("BB")
+      remaining_bb -= 1
+    end
   end
 
   # Insert AB segments
@@ -84,6 +98,24 @@ def solution(aa, ab, bb)
 
   result.join
 end
+
+args = [
+  [5, 0, 2],
+  [1, 2, 1],
+  [1, 2, 2],
+  [0, 2, 1],
+  [0, 2, 0],
+  [0, 0, 10],
+  [3, 0, 0],
+  [4, 0, 1],
+  [0, 3, 2],
+  [0, 0, 0],
+  [1, 1, 2],
+  [6, 3, 5],
+  [5, 3, 3],
+  [3, 3, 5],
+  [2, 3, 5],
+]
 
 args.each do |arg|
   p "==== #{arg}"
