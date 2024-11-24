@@ -2,35 +2,47 @@
 # frozen_string_literal: true
 
 def solution(aa, ab, bb)
-  aa_arr = Array.new(aa, "AA")
-  ab_arr = Array.new(ab, "AB")
-  bb_arr = Array.new(bb, "BB")
-
   arr = []
-  min_count = [aa, bb].min
-  min_count.times do
-    arr << aa_arr.shift
-    arr << bb_arr.shift
-  end
 
-  val = aa_arr.shift || bb_arr.shift
-  if val
-    if val != arr.last
-      arr << val
-    elsif val != arr.first
-      arr.unshift(val)
+  while aa > 0 || bb > 0
+    if arr.empty?
+      if aa >= bb && aa > 0
+        arr << "AA"
+        aa -= 1
+      elsif bb > aa && bb > 0
+        arr << "BB"
+        bb -= 1
+      end
+    else
+      if arr.last == "AA" && bb > 0
+        arr << "BB"
+        bb -= 1
+      elsif arr.last == "BB" && aa > 0
+        arr << "AA"
+        aa -= 1
+      else
+        break
+      end
     end
   end
 
-  ab_arr.size.times do |_i|
-    if arr.empty? || arr.last == "BB" || arr.last == "AB"
-      arr << ab_arr.shift
-    elsif arr.empty? || arr.first == "AA" || arr.first == "AB"
-      arr.unshift(ab_arr.shift)
+  while ab > 0
+    if arr.empty?
+      arr << "AB"
+    elsif arr.last == "AA"
+      arr.unshift("AB")
+    elsif arr.last == "BB"
+      arr << "AB"
+    else
+      if arr.first == "AB"
+        arr.unshift("AB")
+      elsif arr.last == "AB"
+        arr << "AB"
+      end
     end
-  end
 
-  # p "#{aa_arr} #{ab_arr} #{bb_arr}"
+    ab -= 1
+  end
 
   arr.join
 end
@@ -53,6 +65,6 @@ args = [
 ]
 
 args.each do |arg|
-  p '---' * 10
+  p "--- #{arg.join(" ")}"
   p solution(*arg)
 end
