@@ -4,7 +4,7 @@
 # }
 class RateLimiter
   MAX_REQUESTS_PER_HOUR = 1000
-  SECONDS_IN_HOUR = 3600
+  TIME_WINDOW_SECONDS = 3600
 
   attr_reader :queue
 
@@ -18,7 +18,7 @@ class RateLimiter
     current_time = Time.now
 
     @mutex.synchronize do
-      update_requests_queue(ip, current_time - SECONDS_IN_HOUR)
+      update_requests_queue(ip, current_time - TIME_WINDOW_SECONDS)
 
       if queue[ip].size < MAX_REQUESTS_PER_HOUR
         queue[ip] << current_time
