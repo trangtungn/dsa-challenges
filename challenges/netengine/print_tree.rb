@@ -32,6 +32,8 @@
 # { "0" => ["1"], "1" => ["2", "4"], "2" => ["3", "6"], "4" => ["5"] }
 
 # Step 3: Traverse the tree and print the values
+# - Depth First Search (DFS) => not good, children are not under the correct parent
+# - Recursive from root => OK
 
 class TreeStructurePrinter
   def initialize(input_data)
@@ -87,29 +89,6 @@ class TreeStructurePrinter
 
     conn
   end
-
-  # DEPRECATED: Restructured the data to a hash with key as id so we don't need to lookup for name by id
-  # def find_name_by_id(id)
-  #   node = @data.find do |obj|
-  #     obj[:id] == id
-  #   end
-
-  #   node[:name]
-  # end
-
-  # DEPRECATED: This approach requires finding the name by id
-  # def build_data(input_data)
-  #   data_arr = input_data.split("\n")
-
-  #   data_arr.map do |data|
-  #     values = data.split(",")
-  #     {
-  #       id: values[0],
-  #       name: values[1],
-  #       parent: values[2]
-  #     }
-  #   end
-  # end
 end
 
 class Node
@@ -158,6 +137,8 @@ class Tree
   def to_s
     print_tree(@root)
   end
+
+  private
 
   def print_tree(node, link = '')
     p "#{link}#{node.value}"
