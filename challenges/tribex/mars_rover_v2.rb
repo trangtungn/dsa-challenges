@@ -1,7 +1,7 @@
 #!/Users/trangtungn/.rbenv/shims/ruby -w
 # frozen_string_literal: true
 
-class MarsRover
+class MarsRoverV2
   # Define constants for directions and movements
   DIRECTIONS = %w[North East South West].freeze
   MOVEMENTS = [[0, 1], [1, 0], [0, -1], [-1, 0]].freeze
@@ -57,6 +57,8 @@ class MarsRover
       turn_left
     when 'R'
       turn_right
+    else
+      puts 'Invalid command, try again with M, L, R, or Q'
     end
   end
 
