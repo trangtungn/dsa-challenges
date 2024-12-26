@@ -20,6 +20,7 @@ class Node
     @right = node
   end
 end
+
 class BinaryTree
   attr_reader :root
 
@@ -27,4 +28,31 @@ class BinaryTree
     @root = root
   end
 
+  # Traversing tree
+  def to_s
+    print_node(root)
+  end
+
+  def print_node(node, level = '')
+    return if node.nil?
+
+    puts "#{level}#{node.value}"
+    print_node(node.left, "#{level}  ")
+    print_node(node.right, "#{level}  ")
+  end
 end
+
+root = Node.new(3)
+node1 = Node.new(1)
+node2 = Node.new(2)
+
+node5 = Node.new(5)
+node7 = Node.new(7)
+
+root.add_left(node1)
+node1.add_left(node2)
+root.add_right(node5)
+node5.add_left(node7)
+
+tree = BinaryTree.new(root)
+tree.to_s
