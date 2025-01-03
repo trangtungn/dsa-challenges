@@ -89,15 +89,12 @@ Common strategies:
 
 ## Common use cases:
   - Caching
+  - Dictionary lookup
   - Database indexing
   - Symbol tables in compilers
   - Router tables in networking
 
-## References
-- [Hash Table](https://en.wikipedia.org/wiki/Hash_table)
-- [Hash Table Interview Questions](https://github.com/Devinterview-io/hash-table-data-structure-interview-questions)
-
-## Exercises:
+## Operations:
 - To insert a key-value pair: use an array of linked lists and a hash code function
     1. compute the key's hash code, e.g. "aa" -> 123
     2. map the hash code to an index in the array: use modulo operator, e.g. 123 % 64 = 23, where 64 is the size of the array
@@ -127,3 +124,6 @@ Common strategies:
     [6] -> []
     [7] -> ["rat"] -> ["art"]  // Collision handled by linked list
     ```
+## References
+- [Hash Table](https://en.wikipedia.org/wiki/Hash_table)
+- [Hash Table Interview Questions](https://github.com/Devinterview-io/hash-table-data-structure-interview-questions)
