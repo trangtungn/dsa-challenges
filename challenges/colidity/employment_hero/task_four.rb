@@ -69,11 +69,11 @@ def solution(aa, ab, bb)
 
   if remaining_aa > 0
     if result.empty? || result.last == "BB"
-      result << "AA" 
+      result << "AA"
       remaining_aa -= 1
     end
     if result.first == "BB" && remaining_aa > 0
-      result.unshift("AA") 
+      result.unshift("AA")
       remaining_aa -= 1
     end
   elsif remaining_bb > 0
