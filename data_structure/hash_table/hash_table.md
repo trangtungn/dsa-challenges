@@ -3,7 +3,7 @@
 - Is an associative array (a key-value pair), e.g. map, dictionary.
 - It uses a has function to compute the *index*, also called *hash code*, to an array of *buckets* or *slots* where the value is stored.
 
-![hash table](./hash_table.png)
+![hash table](./images/hash_table.png)
 
 ## Hash function
 - To convert key to a **hash value**, which serves as an index to the array of buckets.
@@ -50,14 +50,14 @@
 ## Hash collisions
 - Where the hash function generates **the same index** for more than one key.
 
-![hash collision](./hash_collision.png)
+![hash collision](./images/hash_collision.png)
 
 ### Hash collision resolution
 
 Common strategies:
 1. Open addressing (aka closed hashing):
 
-  ![hash collision resolution](./hash_collision_resolution.png)
+  ![hash collision resolution](./images/hash_collision_resolution.png)
 
 
   - A cell in the hash table is assigned state: empty, occupied, deleted.
@@ -66,21 +66,21 @@ Common strategies:
     - Linear probing: check next bucket sequentially (index + 1, index + 2, etc.)
     - Quadratic probing: check buckets at quadratic intervals (index + 1², index + 2², etc.)
 
-    ![open_addressing](./open_addressing.png)
+    ![open_addressing](./images/open_addressing.png)
 
       *In the following example: hash collision resolved by open addressing with linear probing (interval=1). Note that "Ted Baker" has a unique hash, but nevertheless collided with "Sandra Dee", that had previously collided with "John Smith".*
 
-    ![linear_probing](./linear_probing.png)
+    ![linear_probing](./images/linear_probing.png)
 
     - Double hashing: use second hash function to determine probe sequence
 2. Separate chaining (aka open hashing):
   - More than one records are "chained" to a cell in the hash table. If two records are hashed to the same index, both would go to the same cell as a linked list.
 
     *Hash collision resolved by linked list*
-    ![separate_chaining](./separate_chaining.png)
+    ![separate_chaining](./images/separate_chaining.png)
 
     *Hash collision by separate chaining with head records in the bucket array.*
-    ![separate_chaining_with_head_records](./separate_chaining_with_head_records.png)
+    ![separate_chaining_with_head_records](./images/separate_chaining_with_head_records.png)
 
 ## Common operations:
   - Insert: Add a key-value pair to the hash table
