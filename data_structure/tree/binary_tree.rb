@@ -12,20 +12,51 @@ class Node
     @right = nil
   end
 
-  def add_left(node)
-    @left = node
+  def add_child(val)
+    if @left.nil?
+      add_left_child(val)
+    elsif @right.nil?
+      add_right_child(val)
+    end
   end
 
-  def add_right(node)
-    @right = node
+  def add_left_child(val)
+    @left = Node.new(val)
+  end
+
+  def add_right_child(val)
+    @right = Node.new(val)
   end
 end
 
 class BinaryTree
   attr_reader :root
 
-  def initialize(root)
-    @root = root
+  def initialize(arr)
+    return if arr.empty?
+
+    build_tree(arr)
+  end
+
+  def build_tree(arr)
+    add_root(arr[0])
+    add_nodes(arr[1..])
+  end
+
+  def add_root(val)
+    @root = Node.new(val)
+  end
+
+  def add_nodes(vals)
+    queue = [@root]
+    vals.each_slice(2) do |left_val, right_val|
+      cur_node = queue.shift
+      cur_node.add_left_child(left_val)
+      queue << cur_node.left
+
+      cur_node.add_right_child(right_val)
+      queue << cur_node.right
+    end
   end
 
   # ##################
@@ -61,6 +92,19 @@ class BinaryTree
     level += 1
 
     [recursive_level_count(node.left, level), recursive_level_count(node.right, level)].max
+  end
+
+  def recursive_pick_left(node, arr = [])
+    return arr if node.nil?
+
+    if node.left
+      arr << node.left.value
+      recursive_pick_left(node.left, arr)
+    end
+
+    recursive_pick_left(node.right, arr) if node.right
+
+    arr
   end
 
   # ##################
@@ -160,71 +204,27 @@ class BinaryTree
     return if node.nil?
 
     puts "#{level}#{node.value}"
-    print_node(node.left, "#{level}  ")
-    print_node(node.right, "#{level}  ")
+    print_node(node.left, "#{level}-- L ")
+    print_node(node.right, "#{level}-- R ")
   end
 end
 
-root = Node.new(3)
-node1 = Node.new(1)
-node2 = Node.new(2)
+arrays = [
+  [3, 1, 5, 2, 7],
+  [-5, 11, -3, 4, -15, 12, 14],
+  [10, 5, 15, 3, 7, 12, 17, 2, 4, 6, 8, 11, 13, 16, 18]
+]
 
-node5 = Node.new(5)
-node7 = Node.new(7)
+arrays.each do |arr|
+  p "Array: #{arr}"
+  tree = BinaryTree.new(arr)
+  tree.to_s
+  target = rand(arr.min..arr.max)
+  p "Target: #{target}"
+  p "Find #{target} - Recursive: #{tree.recursive_search(tree.root, target)} | Depth First: #{tree.dfs(target)} | Breadth First: #{tree.bfs(target)}"
+  p "Sum tree - Recursive: #{tree.recurive_sum(tree.root)} | DFS: #{tree.dft_sum} | BFS: #{tree.bf_sum}"
+  p "Min Value - Recursive: #{tree.recursive_min(tree.root, tree.root.value)} | DFT: #{tree.dft_min}"
 
-root.add_left(node1)
-node1.add_left(node2)
-root.add_right(node5)
-node5.add_left(node7)
-
-tree = BinaryTree.new(root)
-tree.to_s
-target = rand(10)
-p "Target: #{target}"
-p "Recursively find #{target}: #{tree.recursive_search(tree.root, target)}"
-p "Depth First Search for #{target}: #{tree.dfs(target)}"
-p "Breadth First Search for #{target}: #{tree.bfs(target)}"
-
-p "Sum tree: #{tree.recurive_sum(tree.root)}"
-p "DF Sum tree: #{tree.dft_sum}"
-p "BF Sum tree: #{tree.bf_sum}"
-
-p "Recursive Min Value: #{tree.recursive_min(tree.root, tree.root.value)}"
-p "DFT Min Value: #{tree.dft_min}"
-
-p "Recurive Max Path Sum: #{tree.recursive_max_path_sum(tree.root)}"
-
-root = Node.new(-5)
-node11 = Node.new(11)
-node3 = Node.new(-3)
-
-node4 = Node.new(4)
-node15 = Node.new(-15)
-node12 = Node.new(12)
-
-root.add_left(node11)
-root.add_right(node3)
-node11.add_left(node4)
-node11.add_right(node15)
-node3.add_right(node12)
-
-node14 = Node.new(14)
-node12.add_right(node14)
-
-tree = BinaryTree.new(root)
-tree.to_s
-target = rand(20)
-p "Target: #{target}"
-p "Recursively find #{target}: #{tree.recursive_search(tree.root, target)}"
-p "Depth First Search for #{target}: #{tree.dfs(target)}"
-p "Breadth First Search for #{target}: #{tree.bfs(target)}"
-
-p "Sum tree: #{tree.recurive_sum(tree.root)}"
-p "DF Sum tree: #{tree.dft_sum}"
-p "BF Sum tree: #{tree.bf_sum}"
-
-p "Min Value in tree: #{tree.recursive_min(tree.root, tree.root.value)}"
-p "DFT Min Value: #{tree.dft_min}"
-
-p "Recurive Max Path Sum: #{tree.recursive_max_path_sum(tree.root)}"
-p "Recurive Level Count: #{tree.recursive_level_count(tree.root)}"
+  p "Max Path Sum - Recurive: #{tree.recursive_max_path_sum(tree.root)}"
+  p "Pick Left - Recurive: #{tree.recursive_pick_left(tree.root)}"
+end
