@@ -45,7 +45,7 @@ Complete Binary Tree vs. Full Binary Tree vs. Perfect Binary Tree
 
 ### Complete Binary Tree
 - All levels are filled except possibly the last level
-- Last level has nodes filled from left to right
+- If the last level is not fully filled, the nodes are filled from left to right
 
 ```
 Example 1 (Complete):
