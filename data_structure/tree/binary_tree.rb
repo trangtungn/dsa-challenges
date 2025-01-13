@@ -38,27 +38,6 @@ class BinaryTree
     build_tree(arr)
   end
 
-  def build_tree(arr)
-    add_root(arr[0])
-    add_nodes(arr[1..])
-  end
-
-  def add_root(val)
-    @root = Node.new(val)
-  end
-
-  def add_nodes(vals)
-    queue = [@root]
-    vals.each_slice(2) do |left_val, right_val|
-      cur_node = queue.shift
-      cur_node.add_left_child(left_val)
-      queue << cur_node.left
-
-      cur_node.add_right_child(right_val)
-      queue << cur_node.right
-    end
-  end
-
   # ##################
   # Recursive methods:
   def recursive_search(node, target)
@@ -195,11 +174,37 @@ class BinaryTree
     min
   end
 
-  # Traversing tree
   def to_s
     print_node(root)
   end
 
+  private
+
+  # ##################
+  # Build tree
+  def build_tree(arr)
+    add_root(arr[0])
+    add_nodes(arr[1..])
+  end
+
+  def add_root(val)
+    @root = Node.new(val)
+  end
+
+  def add_nodes(vals)
+    queue = [@root]
+    vals.each_slice(2) do |left_val, right_val|
+      cur_node = queue.shift
+      cur_node.add_left_child(left_val)
+      queue << cur_node.left
+
+      cur_node.add_right_child(right_val)
+      queue << cur_node.right
+    end
+  end
+
+  # ##################
+  # Traversing tree
   def print_node(node, level = '')
     return if node.nil?
 
