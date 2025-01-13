@@ -185,6 +185,48 @@ each element of array X is an integer within the range [0..2,000,000,000)
 each element of array Y is an integer within the range [1..2,000,000,000)
 arrays X and Y are of equal length.
 
+## Task 7 - possible task
+
+Problem Description:
+
+1. Input:
+  - A string of digits (0-9) representing a sequence entered on a numeric keypad.
+  - A predefined dictionary of valid words.
+2. Output:
+  - A list of all valid words from the dictionary that can be formed using the given numeric input.
+3. Constraints:
+  - The mapping between digits and letters is based on the classic T9 keypad:
+
+    ```
+    2 → "abc"
+    3 → "def"
+    4 → "ghi"
+    5 → "jkl"
+    6 → "mno"
+    7 → "pqrs"
+    8 → "tuv"
+    9 → "wxyz"
+    ```
+
+  - Only the digits 2-9 are valid for input (since 1 and 0 don’t map to any letters).
+  - The dictionary can contain thousands of words.
+
+    Example 1:
+
+    Input:
+
+    Digits: "228"
+    Dictionary: ["cat", "bat", "rat", "cab", "tree", "used"]
+
+    Output:
+
+    ["cat", "cab"]
+
+  Explanation:
+  - The digit 2 maps to ['a', 'b', 'c'], digit 8 maps to ['t', 'u', 'v'].
+  - Possible word combinations: ["cat", "cab", "bat"].
+  - Only ["cat", "cab"] are valid words in the dictionary.
+
 ## Task 8 - possible task
 Given an array with n integers, return  all numbers with x number of unique digits, where 1 <= x =< 2.
 
